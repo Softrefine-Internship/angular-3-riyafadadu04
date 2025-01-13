@@ -7,7 +7,7 @@
   </div>
   <hr />
   <div class="row">
-    <h3 for="text">Trim white-space </h3>
+    <h3 for="text">Trim white-space</h3>
     <input
       type="text"
       class="form-control m-2"
@@ -17,17 +17,72 @@
   </div>
   <hr />
   <div class="row">
-    <h3 class="mb-lg-3">Tooltip Example</h3>
+    <h3 class="mb-lg-4">Tooltip Example</h3>
+    <div class="row mb-lg-5">
+      <div class="col">
+        <label class="mb-2" for="position">Select Position:</label>
+        <select
+          class="form-control py-1"
+          id="position"
+          [(ngModel)]="selectedPosition"
+        >
+          <option value="top">Top</option>
+          <option value="bottom">Bottom</option>
+          <option value="left">Left</option>
+          <option value="right">Right</option>
+        </select>
+      </div>
+      <div class="col">
+        <label class="mb-2" for="color">Select Font Color:</label>
+        <input
+          class="form-control h-50"
+          type="color"
+          id="color"
+          [(ngModel)]="selectedFontColor"
+        />
+      </div>
+      <div class="col">
+        <label class="mb-2" for="background-color"
+          >Select Background Color:</label
+        >
+        <input
+          class="form-control h-50"
+          type="color"
+          id="background-color"
+          [(ngModel)]="selectedBgColor"
+        />
+      </div>
+      <div class="col">
+        <label class="mb-2" for="font-size">Select Font Size:</label>
+        <select
+          class="form-control py-1"
+          id="font-size"
+          [(ngModel)]="selectedFontSize"
+        >
+          <option value="12px">12px</option>
+          <option value="14px">14px</option>
+          <option value="16px">16px</option>
+          <option value="18px">18px</option>
+          <option value="20px">20px</option>
+          <option value="22px">22px</option>
+          <option value="24px">24px</option>
+          <option value="26px">26px</option>
+          <option value="28px">28px</option>
+          <option value="30px">30px</option>
+          <option value="32px">32px</option>
+        </select>
+      </div>
+    </div>
     <div
       class="d-flex justify-content-center align-items-center"
       style="position: relative"
     >
       <span
         appTooltip="This is a tooltip."
-        [tooltipPosition]="'bottom'"
-        [tooltipBackgroundColor]="'#333'"
-        [tooltipFontColor]="'#fff'"
-        [tooltipFontSize]="'16px'"
+        [tooltipPosition]="selectedPosition"
+        [tooltipBackgroundColor]="selectedBgColor"
+        [tooltipFontColor]="selectedFontColor"
+        [tooltipFontSize]="selectedFontSize"
         style="cursor: pointer"
       >
         Hover over me to see the tooltip.

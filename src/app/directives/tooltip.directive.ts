@@ -3,15 +3,17 @@ import {
   ElementRef,
   HostListener,
   Input,
+  OnChanges,
   OnInit,
   Renderer2,
+  SimpleChanges,
 } from '@angular/core';
 
 @Directive({
   selector: '[appTooltip]',
 })
 
-export class TooltipDirective implements OnInit {
+export class TooltipDirective implements OnInit, OnChanges {
   @Input('appTooltip') tooltipContent: string = 'By default tooltip content';
   @Input() tooltipPosition: 'top' | 'bottom' | 'left' | 'right' = 'top';
   @Input() tooltipBackgroundColor: string = '#03045e';
@@ -24,6 +26,27 @@ export class TooltipDirective implements OnInit {
 
   ngOnInit() {
     this.createTooltip();
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (this.tooltip) {
+      if (changes['tooltipBackgroundColor']) {
+        this.renderer.setStyle(
+          this.tooltip,
+          'background',
+          this.tooltipBackgroundColor
+        );
+      }
+      if (changes['tooltipFontColor']) {
+        this.renderer.setStyle(this.tooltip, 'color', this.tooltipFontColor);
+      }
+      if (changes['tooltipFontSize']) {
+        this.renderer.setStyle(this.tooltip, 'fontSize', this.tooltipFontSize);
+      }
+      if (changes['tooltipPosition']) {
+        this.setPositionStyles();
+      }
+    }
   }
 
   private createTooltip() {
@@ -53,7 +76,12 @@ export class TooltipDirective implements OnInit {
 
   private setPositionStyles() {
     if (this.tooltip) {
+      this.renderer.setStyle(this.tooltip, 'bottom', null);
+      this.renderer.setStyle(this.tooltip, 'top', null);
+      this.renderer.setStyle(this.tooltip, 'left', null);
+      this.renderer.setStyle(this.tooltip, 'right', null);
       this.renderer.setStyle(this.tooltip, 'whiteSpace', 'nowrap');
+
       switch (this.tooltipPosition) {
         case 'top':
           this.renderer.setStyle(this.tooltip, 'bottom', '100%');

@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import { HighlightDirective } from './directives/highlight.directive';
 import { WhiteSpaceTrimDirective } from './directives/white-space-trim.directive';
 import { TooltipDirective } from './directives/tooltip.directive';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -13,7 +14,7 @@ import { TooltipDirective } from './directives/tooltip.directive';
     WhiteSpaceTrimDirective,
     TooltipDirective,
   ],
-  imports: [BrowserModule],
+  imports: [BrowserModule, FormsModule],
   providers: [],
   bootstrap: [AppComponent],
 })
